@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FilterByRegion } from './components/filter-component';
 import SearchCountries from './components/search-component';
+import { WIKI_INFO_URL_BASE } from './const';
 import { useFetch } from './services/fetchHook';
 
 function App() {
@@ -32,10 +33,10 @@ function App() {
     {(!error && loaded &&
       <div className="wrapper">
         <div className="wrapper-inner">
-        <SearchCountries callback={setQuery}>
-        </SearchCountries>
-        <FilterByRegion data={data} callback={setFilter}>
-        </FilterByRegion>
+          <SearchCountries callback={setQuery}>
+          </SearchCountries>
+          <FilterByRegion data={data} callback={setFilter}>
+          </FilterByRegion>
         </div>
         <ul className="card-grid">
           {search(data)
@@ -43,8 +44,10 @@ function App() {
             .map((item) => (
               <li key={item.alpha3Code}>
                 <article className="card">
-                  <div className="card-image">
-                    <img src={item.flag.large} alt={item.name} />
+                  <div className="card-image"> 
+                    <a href={WIKI_INFO_URL_BASE + item.name} target="_blank" rel='noreferrer' >
+                      <img src={item.flag.large} alt={item.name} />
+                    </a>
                   </div>
                   <div className="card-content">
                     <h2 className="card-name">{item.name}</h2>
@@ -67,7 +70,7 @@ function App() {
                             navigator.language, {
                             minimumFractionDigits: 2
                           })
-                        } km2
+                        } km<sup>2</sup>
                       </span>
                       </li>
                     </ul>
