@@ -1,37 +1,15 @@
-import { useState, useEffect } from 'react';
-import { API_KEY, COUNTRY_API_URL } from './const';
-import { FilterByRegion } from './filter-component';
-import SearchCountries from './search-component';
+import { useState } from 'react';
+import { FilterByRegion } from './components/filter-component';
+import SearchCountries from './components/search-component';
+import { useFetch } from './services/fetchHook';
 
 function App() {
-  const [error, setError] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const { data, loaded, error } = useFetch('/all');
+
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('');
   const [paginate, setpaginate] = useState(8);
 
-  useEffect(() => {
-    const request_headers = new Headers();
-    request_headers.append('Authorization', `Bearer ${API_KEY}`);
-    request_headers.append('Content-Type', 'application/json');
-
-    fetch(COUNTRY_API_URL, {
-      method: 'GET',
-      headers: request_headers
-    })
-      .then((req) => req.json())
-      .then((res) => {
-        setLoaded(true);
-        setItems(res);
-      },
-        (error) => {
-          setLoaded(true);
-          setError(error);
-        });
-  }, []);
-
-  const data = Object.values(items);
   const search_parameters = Object.keys(Object.assign({}, ...data));
 
   const search = (data) => {
@@ -48,17 +26,17 @@ function App() {
     setpaginate((prevValue) => prevValue + 8);
   };
 
-  if (error) {
-    return <>{error.message}</>
-  } else if (!loaded) {
-    return <>loading...</>
-  } else {
-    return <>
+  return <>
+    {(error && <>{error.message}</>)}
+    {(!loaded && <>loading...</>)}
+    {(!error && loaded &&
       <div className="wrapper">
+        <div className="wrapper-inner">
         <SearchCountries callback={setQuery}>
         </SearchCountries>
         <FilterByRegion data={data} callback={setFilter}>
         </FilterByRegion>
+        </div>
         <ul className="card-grid">
           {search(data)
             .slice(0, paginate)
@@ -100,8 +78,8 @@ function App() {
         </ul>
         <button onClick={load_more}>Load More</button>
       </div>
-    </>
-  }
+    )}
+  </>
 }
 
 export default App;

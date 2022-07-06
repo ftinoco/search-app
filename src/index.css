@@ -56,12 +56,13 @@ body {
     width: 96%;
     max-width: 1140px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 .wrapper-inner {
-    max-width: 600px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex; 
+    align-items: center;
+    justify-content: space-evenly;
 }
 .card-grid {
     margin: 2em 0;

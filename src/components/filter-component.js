@@ -10,7 +10,7 @@ export function FilterByRegion({ data, callback }) {
                 <option value="">Filter By Region</option>
                 {
                     filter_items.map((item) => (
-                        <option value={item}>Filter by {item}</option>
+                        <option key={item} value={item}>Filter by {item}</option>
                     ))
                 }
             </select>
