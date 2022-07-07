@@ -9,4 +9,5 @@ In this application we can search country by name and filter countries by region
 
 ## References
 Inpired in [React Components – How to Create a Search, Filter, and Pagination Component in React](https://www.freecodecamp.org/news/how-to-react-components/).
-Using the [CoutryAPI](https://countryapi.io/documentation)
+
+Using country API from [CountryAPI.io]](https://countryapi.io/documentation)
