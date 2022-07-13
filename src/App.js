@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CountryComponent } from './components/country-component';
+import { Error } from './components/error/error-component';
 import { FilterByRegion } from './components/filter-component';
 import SearchCountries from './components/search-component'; 
 import { RegularList } from './regularList';
@@ -29,7 +30,7 @@ function App() {
   };
 
   return <>
-    {(error && <>{error.message}</>)}
+    {(error && <Error code={error}  />)}
     {(!loaded && <>loading...</>)}
     {(!error && loaded &&
       <div className="wrapper">

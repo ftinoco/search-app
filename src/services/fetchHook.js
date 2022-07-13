@@ -28,7 +28,7 @@ export const useFetch = (url) => {
             })
             .catch((error) => {
                 setLoaded(true);
-                setError(error);
+                setError(error.message.trim());
             });
     }
 
