@@ -1,3 +1,8 @@
+/**
+ * Controlled component to manage search input
+ * @param {callback} param0 callback function to fire when input value change 
+ * @returns Search component
+ */
 const SearchCountries = ({callback}) => {
   return (
     <div className="search-wrapper">

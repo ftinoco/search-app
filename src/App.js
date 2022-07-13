@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { CountryComponent } from './components/country-component';
 import { FilterByRegion } from './components/filter-component';
-import SearchCountries from './components/search-component';
-import { WIKI_INFO_URL_BASE } from './const';
+import SearchCountries from './components/search-component'; 
+import { RegularList } from './regularList';
 import { useFetch } from './services/fetchHook';
 
 function App() {
@@ -39,45 +40,10 @@ function App() {
           </FilterByRegion>
         </div>
         <ul className="card-grid">
-          {search(data)
-            .slice(0, paginate)
-            .map((item) => (
-              <li key={item.alpha3Code}>
-                <article className="card">
-                  <div className="card-image"> 
-                    <a href={WIKI_INFO_URL_BASE + item.name} target="_blank" rel='noreferrer' >
-                      <img src={item.flag.large} alt={item.name} />
-                    </a>
-                  </div>
-                  <div className="card-content">
-                    <h2 className="card-name">{item.name}</h2>
-                    <ul className="card-list">
-                      <li>Capital: <span>{item.capital}</span></li>
-                      <li>Region: <span>{item.region}</span></li>
-                      <li>
-                        Population: <span>
-                          {
-                            item.population.toLocaleString(
-                              navigator.language, {
-                              minimumFractionDigits: 2
-                            })
-                          }
-                        </span>
-                      </li>
-                      <li>Area: <span>
-                        {
-                          item.area.toLocaleString(
-                            navigator.language, {
-                            minimumFractionDigits: 2
-                          })
-                        } km<sup>2</sup>
-                      </span>
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-              </li>
-            ))}
+          <RegularList
+            items={search(data).slice(0, paginate)}
+            itemComponent={CountryComponent}
+            resourceName= 'country' />
         </ul>
         <button onClick={load_more}>Load More</button>
       </div>
