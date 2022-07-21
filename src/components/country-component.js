@@ -21,7 +21,7 @@ export const CountryComponent = ({ country }) => {
                         </a>
                     </div>
                     <div className="card-content">
-                        <h2 className="card-name">{name}</h2>
+                        <h2 className="card-name" data-testid="country-name">{name}</h2>
                         <ul className="card-list">
                             <li>Capital: <span>{capital}</span></li>
                             <li>Region: <span>{region}</span></li>

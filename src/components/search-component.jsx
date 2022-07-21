@@ -14,6 +14,7 @@ const SearchCountries = ({callback}) => {
           placeholder="Search for..."
           onChange={(e) => callback(e.target.value)}
           autoComplete="off"
+          data-testid="search-input"
         />
         <span className="sr-only">Search countries here</span>
       </label>

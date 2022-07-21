@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CountryComponent } from './components/country-component';
 import { Error } from './components/error/error-component';
 import { FilterByRegion } from './components/filter-component';
