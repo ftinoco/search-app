@@ -1,5 +1,12 @@
-export function FilterByRegion({ data, callback }) {
-    const filter_items = [...new Set(data.map(item => item.region))];
+export function FilterByRegion({ callback }) {
+    const filter_items = [
+        'Africa',
+        'Americas',
+        'Antartic',
+        'Asia',
+        'Europe',
+        'Oceania'
+    ];
 
     return <>
         <div className="select">
