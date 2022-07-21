@@ -17,13 +17,13 @@ In this application we'll be able to search country by name and filter countries
 npm install
 ```
 
-Create an account in [CountryAPI login](https://countryapi.io/login) and generate API key, with free plan we get 100000 request.
+**Create an account in [CountryAPI](https://countryapi.io/login) and generate API key, with free plan we get 100,000 request.**
 
 **Add constants file (const.js) on src folder**
 ```bash
 export const WIKI_INFO_URL_BASE = 'https://en.wikipedia.org/wiki/';
 export const COUNTRY_API_URL_BASE = 'https://countryapi.io/api';
-export const API_KEY = '-- with your token --';
+export const API_KEY = '-- your API Key --';
 ```
 
 **Run project**
