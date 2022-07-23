@@ -1,9 +1,9 @@
-import { response, rest } from 'msw';
+import { rest } from 'msw'; 
 import { COUNTRY_API_URL_BASE } from '../const';
 
 export const getAllCountries = ({
-    response: [],
-    error,
+    response = [],
+    error = '',
     status
 }) => rest.get(`${COUNTRY_API_URL_BASE}/all`, (_, res, ctx) => {
     return res(
@@ -13,11 +13,11 @@ export const getAllCountries = ({
 });
 
 export const getCountriesByRegion = ({
-    response: [],
-    error,
+    response = [],
+    error='',
     status,
     region
-}) => rest.get(`${COUNTRY_API_URL_BASE}/region/${region}`,
+}) => rest.get(`${COUNTRY_API_URL_BASE}/region/:region`,
     (_, res, ctx) => {
         return res(
             ctx.json(response),
