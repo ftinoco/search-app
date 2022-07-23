@@ -1,4 +1,4 @@
-import { rest } from 'msw'; 
+import { rest } from 'msw';
 import { COUNTRY_API_URL_BASE } from '../const';
 
 export const getAllCountries = ({
@@ -14,11 +14,13 @@ export const getAllCountries = ({
 
 export const getCountriesByRegion = ({
     response = [],
-    error='',
-    status,
-    region
-}) => rest.get(`${COUNTRY_API_URL_BASE}/region/:region`,
+    error = '',
+    status = 200,
+    region,
+    spy = jest.Mock
+}) => rest.get(`${COUNTRY_API_URL_BASE}/region/${region}`,
     (_, res, ctx) => {
+        spy(_.body);
         return res(
             ctx.json(response),
             ctx.status(status, error)
