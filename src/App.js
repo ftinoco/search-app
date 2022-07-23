@@ -16,6 +16,7 @@ function App() {
   const [paginate, setPaginate] = useState(8);
 
   useEffect(() => {
+    setLoaded(false);
     const opts = {
       method: 'GET',
       headers: {
@@ -23,10 +24,10 @@ function App() {
         'Content-Type': 'application/json'
       }
     };
-
+    //console.debug(filter);
     const url = (filter) ? `/region/${filter}` : '/all';
     fetch(`${COUNTRY_API_URL_BASE}${url}`, opts)
-      .then((response) => { 
+      .then((response) => {
         if (!response.ok) {
           throw Error(response.status)
         }
@@ -39,19 +40,15 @@ function App() {
         */
         const keys = Object.keys(result).sort();
         const resultAsArray = keys.map((key) => result[key]);
-        /* getting array of fields */
-        const search_parameters = Object.keys(Object.assign({}, ...resultAsArray));
+        // filtering countries just by name
         setResponse(resultAsArray.filter(
-          (item) =>
-            search_parameters.some(
-              (searchParam) => item[searchParam].toString()
-                .toLowerCase()
-                .includes(query)
-            )
+          (item) => item['name'].toString()
+            .toLowerCase()
+            .includes(query)
         ));
       })
       .catch((error) => {
-        setLoaded(true); 
+        setLoaded(true);
         setError(error.message.trim());
       });
   }, [query, filter]);
@@ -67,17 +64,20 @@ function App() {
   return (
     <>
       {(error && <ErrorEnum code={error} />)}
-      {(!loaded && <div data-testid="loading">loading...</div>)}
-      {(!error && loaded &&
+      {(!error &&
         <div className="wrapper">
           <div className="wrapper-inner">
             <SearchCountries callback={setQuery} />
             <FilterByRegion data={data} callback={setFilter} />
           </div>
-          <RegularList
-            items={data.slice(0, paginate)}
-            itemComponent={CountryComponent}
-            resourceName='country' />
+          {(!loaded ?
+            <div data-testid="loading">loading...</div>
+            :
+            <RegularList
+              items={data.slice(0, paginate)}
+              itemComponent={CountryComponent}
+              resourceName='country' />
+          )}
           {
             (paginate < data.length) ?
               <button onClick={loadMore}>Load More</button>
