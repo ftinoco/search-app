@@ -2,7 +2,7 @@
 
 This is a test project, where I tried to use good practices in order to consume an API to show information about countries in the world. 
 
-It will implement unit testing with jest, msw (mock service worker) and testing-library
+It's implement unit testing with jest, msw (mock service worker) and testing-library
 
 ## Screens
 ![](./doc/images/search-app.png)
