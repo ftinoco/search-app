@@ -22,7 +22,7 @@ export const InternalServerError = () => {
     return (
         <>
             <div ref={ref} className="full-screen">
-                <div className='container'>
+                <div className='container' data-testid='500-error'>
                     <span className="error-num">5</span>
                     <div className='eye'></div>
                     <div className='eye'></div>
